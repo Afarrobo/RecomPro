@@ -1,0 +1,9 @@
+backend/.venv/
+backend/artifacts/
+backend/dense_e5_best/
+backend/.env
+frontend/node_modules/
+frontend/.env
+frontend/dist/
+__pycache__/
+*.pyc
