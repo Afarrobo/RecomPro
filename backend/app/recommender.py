@@ -154,11 +154,6 @@ def detect_sort_intent(query: str):
     return None
 
 
-# Below this blended score, treat the match as "not really in our catalog" rather than
-# forcing a top-K list of loosely-related products.
-MIN_MATCH_SCORE = 0.30
-
-
 def row_minmax(x: np.ndarray) -> np.ndarray:
     mn, mx = x.min(axis=1, keepdims=True), x.max(axis=1, keepdims=True)
     return ((x - mn) / (mx - mn + 1e-8)).astype('float32')
@@ -376,9 +371,24 @@ class RecommenderService:
         n = len(self.catalog)
 
         q_dense = self._encode([q], is_query=True)
-        dense = row_minmax((q_dense @ self.product_embeddings.T))[0]
-        sparse = row_minmax(cosine_similarity(self.sparse_vectorizer.transform([q]), self.product_sparse_matrix).astype('float32'))[0]
+        raw_dense_sims = (q_dense @ self.product_embeddings.T)[0]
+        raw_sparse_sims = cosine_similarity(self.sparse_vectorizer.transform([q]), self.product_sparse_matrix).astype('float32')[0]
+        max_dense_score = float(raw_dense_sims.max())
+        max_sparse_score = float(raw_sparse_sims.max())
+
+        dense = row_minmax(raw_dense_sims.reshape(1, -1))[0]
+        sparse = row_minmax(raw_sparse_sims.reshape(1, -1))[0]
         aspect, neg, cat, price_pen, groups, cats, price_info = self._aspect_and_category_features(q)
+
+        # Out-of-domain guard (ports the notebook's OOD check): reject queries whose best raw
+        # similarity to anything in the catalog is weak, using the *unscaled* similarity — row_minmax
+        # always stretches to 0-1 relative to this one query, so it can't be used to detect "no match".
+        is_ood = False
+        if not groups and not cats:
+            if max_dense_score < 0.75 and max_sparse_score < 0.08:
+                is_ood = True
+        elif max_dense_score < 0.60 and max_sparse_score < 0.02:
+            is_ood = True
 
         X = np.stack([dense, sparse, aspect, cat, self.rating_feature, self.positive_rate_feature,
                        price_pen, neg, self.review_confidence_feature], axis=1).astype('float32')
@@ -412,11 +422,9 @@ class RecommenderService:
         else:
             idx = idx[np.argsort(-scores[idx])]
 
-        # If nothing about this query matched a known category or aspect, and even the best
-        # candidate's blended score is weak, this is very likely a product/brand we don't carry —
-        # return an empty result instead of forcing an irrelevant top-K.
-        no_signal = not groups and not cats and sort_order is None
-        if no_signal and (len(idx) == 0 or scores[idx[0]] < MIN_MATCH_SCORE):
+        # Out-of-domain guard wins regardless of category/aspect/price/sort matches — a query
+        # that doesn't meaningfully resemble anything in the catalog returns no results.
+        if is_ood:
             ranked = np.array([], dtype=int)
         else:
             ranked = idx[:top_k]
