@@ -2,6 +2,26 @@
 
 **RecomPro** is an aspect-aware multilingual product recommendation system built using **FastAPI**, **PostgreSQL**, and **React (Vite)**.
 
+# Credits
+
+This project was developed as an undergraduate CSE capstone project under the supervision of **Nishat Tasnim**, Lecturer, Department of Computer Science & Engineering.
+
+### Supervisor
+
+**Nishat Tasnim**  
+_Lecturer, Department of Computer Science & Engineering_
+
+### Project Team
+
+| Role                              | Contributor                                                    |
+| --------------------------------- | -------------------------------------------------------------- |
+| **Team Lead & Notebook Workflow** | **Raiyan Fardin** — [@Fardin520](https://github.com/Fardin520) |
+| **Application Development**       | **Afsin Sultana** — [@Afarrobo](https://github.com/Afarrobo)   |
+| **Report & Documentation**        | **Md Sabbir Hossain**                                          |
+| **Report & Documentation**        | **Md Arif Hossain**                                            |
+
+---
+
 The system imports product reviews from a multi-sheet Excel dataset into PostgreSQL, constructs product profiles from review data, and generates recommendations using a hybrid ranking approach that combines:
 
 - Dense semantic retrieval (Multilingual E5)

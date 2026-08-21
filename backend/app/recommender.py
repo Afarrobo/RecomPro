@@ -89,7 +89,7 @@ BANGLA_DIGITS = str.maketrans('০১২৩৪৫৬৭৮৯', '0123456789')
 FEATURE_NAMES = ['dense', 'sparse', 'aspect', 'category', 'rating', 'positive_rate', 'price_penalty', 'negative_rate', 'confidence']
 # Hand-set weights (dense/sparse/aspect/category matches push scores up, price_penalty/negative_rate pull them down).
 # Swap these for manual_weights.joblib from your Kaggle run if you have it (see load_optional_artifacts).
-DEFAULT_MANUAL_WEIGHTS = np.array([0.32, 0.14, 0.20, 0.14, 0.05, 0.05, -0.18, -0.12, 0.05], dtype='float32')
+DEFAULT_MANUAL_WEIGHTS = np.array([0.30, 0.15, 0.38, 0.10, 0.04, 0.03, -0.08, -0.22, 0.05], dtype='float32')
 
 
 def normalize_text(x) -> str:
