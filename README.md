@@ -2,6 +2,10 @@
 
 **RecomPro** is an aspect-aware multilingual product recommendation system built using **FastAPI**, **PostgreSQL**, and **React (Vite)**.
 
+## 🎥 Demo
+
+[▶️ Watch the RecomPro Demo ]  ( (https://drive.google.com/file/d/12nGOlMO_l2xVvICB1dJfJMxeznl-ZBLI/view?usp=sharing) )
+
 # Credits
 
 This project was developed as an undergraduate CSE capstone project under the supervision of **Nishat Tasnim**, Lecturer, Department of Computer Science & Engineering.
