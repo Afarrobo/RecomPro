@@ -4,7 +4,7 @@
 
 ## 🎥 Demo
 
-[▶️ Watch the RecomPro Demo ]  (https://drive.google.com/file/d/12nGOlMO_l2xVvICB1dJfJMxeznl-ZBLI/view?usp=sharing)
+[▶️ Watch the RecomPro Demo ]  (https://youtu.be/KSdGAEaSRKk)
 
 # Credits
 
