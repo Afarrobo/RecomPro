@@ -20,6 +20,7 @@ Doi: 10.1016/j.dib.2026.113314
 
 **Nishat Tasnim**  
 _Lecturer, Department of Computer Science & Engineering_
+_Jahangirnagar University
 
 ### Project Team
 
