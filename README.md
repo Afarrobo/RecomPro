@@ -10,6 +10,12 @@
 
 This project was developed as an undergraduate CSE capstone project under the supervision of **Nishat Tasnim**, Lecturer, Department of Computer Science & Engineering.
 
+# See Our Data In Brief Journal for this Dataset 
+
+Link: https://www.sciencedirect.com/science/article/pii/S2352340926008607
+Doi: 10.1016/j.dib.2026.113314
+
+
 ### Supervisor
 
 **Nishat Tasnim**  
