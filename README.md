@@ -19,7 +19,7 @@ Doi: 10.1016/j.dib.2026.113314
 ### Supervisor
 
 **Nishat Tasnim**  
-_Lecturer, Department of Computer Science & Engineering_
+_Lecturer, Department of Computer Science & Engineering_, 
 _Jahangirnagar University_
 
 ### Project Team
